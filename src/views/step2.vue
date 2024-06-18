@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { RouterLink } from "vue-router";
 
 const itemList = ref([]);
 
@@ -27,17 +28,21 @@ onMounted(async () => {
   <div class="container">
     <div class="card" v-for="sport in itemList" :key="sport.name">
       <h1 class="name">{{ sport.name }}</h1>
-      <div
-        class="session"
-        v-for="session in sport.sessions"
-        :key="session.date"
-      >
-        <h3>{{ session.option }}</h3>
-        <p>Date: {{ session.date }}</p>
-        <p>Time: {{ session.start_at }} - {{ session.end_at }}</p>
-        <p>Category: {{ session.categories }}</p>
-        <div class="sessions">
+      <div class="sessions">
+        <div
+          class="session"
+          v-for="session in sport.sessions"
+          :key="session.date"
+        >
+          <h3>{{ session.option }}</h3>
+          <p>Date: {{ session.date }}</p>
+          <p>Time: {{ session.start_at }} - {{ session.end_at }}</p>
+          <p>Category: {{ session.categories }}</p>
+          <p>Registered: {{ session.registered }}</p>
           <p>Available Places: {{ session.available_places }}</p>
+          <router-link :to="{ name: 'Step3', params: { id: session.date } }"
+            ><button>Réserver</button></router-link
+          >
         </div>
       </div>
     </div>

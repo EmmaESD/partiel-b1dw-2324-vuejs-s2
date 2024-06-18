@@ -1,6 +1,22 @@
+<template>
+  <form @submit.prevent="sendForm">
+    <input type="text" v-model="form.nom" placeholder="Nom" />
+    <input type="text" v-model="form.prenom" placeholder="Prénom" />
+    <input type="email" v-model="form.email" placeholder="Email" />
+    <input type="tel" v-model="form.telephone" placeholder="Téléphone" />
+    <input
+      type="text"
+      v-model.number="form.code"
+      placeholder="Code postal de résidence"
+    />
+
+    <button type="submit">Valider</button>
+  </form>
+</template>
+
 <script setup>
-import { ref } from "vue";
-const emit = defineEmits(["addItemIntoInfos"]);
+import { ref, defineEmits } from "vue";
+import { RouterLink } from "vue-router";
 
 const form = ref({
   nom: "",
@@ -10,17 +26,14 @@ const form = ref({
   code: "",
 });
 
-const props = defineProps({
-  nom: String,
-  prenom: String,
-  email: String,
-  telephone: String,
-  code: Number,
-});
+const emit = defineEmits(["addItemIntoInfos"]);
 
-function sendForm(e) {
-  e.preventDefault();
+function sendForm() {
   emit("addItemIntoInfos", { ...form.value });
+  resetForm();
+}
+
+function resetForm() {
   form.value = {
     nom: "",
     prenom: "",
@@ -30,21 +43,6 @@ function sendForm(e) {
   };
 }
 </script>
-
-<template>
-  <form @submit="sendForm">
-    <input type="text" v-model="form.nom" placeholder="nom" />
-    <input type="text" v-model="form.prenom" placeholder="prenom" />
-    <input type="text" v-model="form.email" placeholder="Email" />
-    <input type="text" v-model="form.telephone" placeholder="telephone" />
-    <input
-      type="text"
-      v-model="form.code"
-      placeholder="Code postal de résidence"
-    />
-    <RouterLink to="/step2"><input type="submit" value="Valider" /></RouterLink>
-  </form>
-</template>
 
 <style scoped>
 form {
