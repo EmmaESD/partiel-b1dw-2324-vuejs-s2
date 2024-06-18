@@ -1,5 +1,4 @@
 <script setup>
-import { RouterView } from "vue-router";
 import { ref } from "vue";
 
 const infosList = ref([
@@ -14,14 +13,16 @@ const infosList = ref([
 ]);
 
 const addItemIntoInfos = (item) => {
-  console.log("ajouter un nouvel élément");
+  console.log("Ajouter un nouvel élément :", item);
   infosList.value.push(item);
 };
 </script>
 
 <template>
-  <h1>JO 2024</h1>
-  <RouterView />
+  <div>
+    <h1>JO 2024</h1>
+    <RouterView :infosList="infosList" :addItemIntoInfos="addItemIntoInfos" />
+  </div>
 </template>
 
 <style scoped></style>

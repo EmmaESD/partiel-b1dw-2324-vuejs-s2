@@ -1,47 +1,73 @@
 <script setup>
+import { ref, watchEffect, defineProps, defineEmits } from "vue";
+
+const props = defineProps({
+  dataToEdit: Object, // Définissez le type de votre prop dataToEdit
+});
+
 const emit = defineEmits(["addItemIntoInfos"]);
 
-const form = ref({
+const formData = ref({
   nom: "",
   prenom: "",
   email: "",
   telephone: "",
-  code: "",
+  codePostal: "",
 });
 
-const props = defineProps({
-  nom: String,
-  prenom: String,
-  email: String,
-  telephone: String,
-  code: Number,
+const editing = ref(false);
+
+// Utilisation de watchEffect pour surveiller les changements dans props.dataToEdit
+watchEffect(() => {
+  if (props.dataToEdit) {
+    formData.value = { ...props.dataToEdit };
+    editing.value = true;
+  } else {
+    resetForm(); // Réinitialiser le formulaire si dataToEdit devient null ou undefined
+  }
 });
 
-function sendForm(e) {
-  e.preventDefault();
-  emit("addItemIntoInfos", { ...form.value });
-  form.value = {
+function handleSubmit() {
+  emit("addItemIntoInfos", { ...formData.value });
+  resetForm();
+}
+
+function resetForm() {
+  formData.value = {
     nom: "",
     prenom: "",
     email: "",
     telephone: "",
-    code: "",
+    codePostal: "",
   };
+  editing.value = false;
 }
 </script>
 
 <template>
-  <h1>Mes couilles dans du papier</h1>
-  <!-- <form @submit="sendForm">
-    <input type="text" v-model="form.nom" placeholder="nom" />
-    <input type="text" v-model="form.prenom" placeholder="prenom" />
-    <input type="text" v-model="form.email" placeholder="Email" />
-    <input type="text" v-model="form.telephone" placeholder="telephone" />
+  <form @submit.prevent="handleSubmit">
+    <input type="text" v-model="formData.nom" placeholder="Nom" />
+    <input type="text" v-model="formData.prenom" placeholder="Prénom" />
+    <input type="email" v-model="formData.email" placeholder="Email" />
+    <input type="tel" v-model="formData.telephone" placeholder="Téléphone" />
     <input
       type="text"
-      v-model="form.code"
+      v-model.number="formData.codePostal"
       placeholder="Code postal de résidence"
     />
-    <input type="submit" value="Valider" />
-  </form> -->
+
+    <RouterLink to="/step2"
+      ><button type="submit">
+        {{ editing ? "Modifier" : "Valider" }}
+      </button></RouterLink
+    >
+  </form>
 </template>
+
+<style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
