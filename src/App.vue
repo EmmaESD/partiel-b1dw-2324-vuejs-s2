@@ -1,30 +1,32 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import Form from "./components/Form.vue";
+import { RouterView } from "vue-router";
+
+const infosList = ref([
+  {
+    id: 1,
+    nom: "Doe",
+    prenom: "John",
+    email: "johndoe@gmail.com",
+    telephone: "0601023532",
+    code: "33000",
+  },
+]);
+
+const addItemIntoInfos = (item) => {
+  console.log("ad new item");
+  infosList.value.push(item);
+};
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <RouterView
+    :nom="nom"
+    :prenom="prenom"
+    :email="email"
+    :telephone="telephone"
+    :code="code"
+  />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
