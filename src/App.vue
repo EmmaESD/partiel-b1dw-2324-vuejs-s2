@@ -17,6 +17,12 @@ const addItemIntoInfos = (item) => {
   console.log("ajouter un nouvel élément");
   infosList.value.push(item);
 };
+const id = ref("");
+const nom = ref("");
+const prenom = ref("");
+const email = ref("");
+const telephone = ref("");
+const code = ref("");
 </script>
 
 <template>

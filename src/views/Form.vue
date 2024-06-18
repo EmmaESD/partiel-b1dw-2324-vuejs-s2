@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 const emit = defineEmits(["addItemIntoInfos"]);
 
 const form = ref({
@@ -31,8 +32,7 @@ function sendForm(e) {
 </script>
 
 <template>
-  <h1>Mes couilles dans du papier</h1>
-  <!-- <form @submit="sendForm">
+  <form @submit="sendForm">
     <input type="text" v-model="form.nom" placeholder="nom" />
     <input type="text" v-model="form.prenom" placeholder="prenom" />
     <input type="text" v-model="form.email" placeholder="Email" />
@@ -42,6 +42,14 @@ function sendForm(e) {
       v-model="form.code"
       placeholder="Code postal de résidence"
     />
-    <input type="submit" value="Valider" />
-  </form> -->
+    <RouterLink to="/step2"><input type="submit" value="Valider" /></RouterLink>
+  </form>
 </template>
+
+<style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+</style>
