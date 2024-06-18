@@ -1,6 +1,6 @@
 <script setup>
-import Form from "./components/Form.vue";
 import { RouterView } from "vue-router";
+import { ref } from "vue";
 
 const infosList = ref([
   {
@@ -14,19 +14,14 @@ const infosList = ref([
 ]);
 
 const addItemIntoInfos = (item) => {
-  console.log("ad new item");
+  console.log("ajouter un nouvel élément");
   infosList.value.push(item);
 };
 </script>
 
 <template>
-  <RouterView
-    :nom="nom"
-    :prenom="prenom"
-    :email="email"
-    :telephone="telephone"
-    :code="code"
-  />
+  <h1>JO 2024</h1>
+  <RouterView />
 </template>
 
 <style scoped></style>
