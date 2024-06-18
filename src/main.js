@@ -11,7 +11,7 @@ const routes = [
   { path: "/", component: Form },
   { path: "/step2", component: Step2 },
   { path: "/step3/:id", name: "Step3", component: Step3 },
-  { path: "/step4/:id", name: "Step4", component: Step4 },
+  { path: "/step4", name: "Step4", component: Step4 },
 ];
 
 const router = createRouter({

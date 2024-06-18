@@ -53,7 +53,7 @@ onMounted(async () => {
       <p>Catégorie : {{ session.categories }}</p>
       <p>Inscrits : {{ session.registered }}</p>
       <p>Places disponibles : {{ session.available_places }}</p>
-      <RouterLink><button>Valider</button></RouterLink>
+      <RouterLink to="/step4"><button>Valider</button></RouterLink>
     </div>
   </div>
   <div v-else>
