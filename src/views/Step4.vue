@@ -47,14 +47,14 @@ const formData = ref({
 
 watchEffect(() => {
   if (props.dataToEdit) {
-    formData.value = { ...props.dataToEdit }; // Mettre à jour le formulaire avec les données à éditer
+    formData.value = { ...props.dataToEdit };
   } else {
-    resetForm(); // Réinitialiser le formulaire si dataToEdit est vide
+    resetForm();
   }
 });
 
 function editForm() {
-  emit("editForm"); // Émettre un événement pour indiquer que l'utilisateur veut éditer le formulaire
+  emit("editForm");
 }
 
 function resetForm() {
@@ -68,6 +68,4 @@ function resetForm() {
 }
 </script>
 
-<style scoped>
-/* Styles spécifiques au composant Recap.vue */
-</style>
+<style scoped></style>
